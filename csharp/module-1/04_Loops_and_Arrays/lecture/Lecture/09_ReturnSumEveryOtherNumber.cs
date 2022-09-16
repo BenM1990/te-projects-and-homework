@@ -13,6 +13,10 @@
         {
             int sum = 0;
 
+            for (int i = 0; i < arrayToLoopThrough.Length; i = i + 2) //could write i += 2 instead of i= i + 2
+            {
+                sum += arrayToLoopThrough[i];
+            }
 
             return sum;
         }

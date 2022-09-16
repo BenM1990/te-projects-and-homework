@@ -24,7 +24,14 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public double CalculateShippingTotal(int weightInPounds)
         {
-            return 0;
+            if (weightInPounds <= MaxWeightPounds)
+            {
+                return UpTo40PoundRate * weightInPounds;
+            }
+          else
+            {
+                return (MaxWeightPounds * UpTo40PoundRate) + (Over40PoundRate * (weightInPounds - MaxWeightPounds));
+            }
         }
 
         /*
@@ -41,7 +48,21 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public double CalculateShippingTotal(int weightInPounds, bool hasDiscount)
         {
-            return 0;
+
+            double mainPrice;
+            if (weightInPounds <= MaxWeightPounds)
+            {
+                mainPrice = UpTo40PoundRate * weightInPounds;
+            }
+            else
+            {
+                mainPrice = (MaxWeightPounds * UpTo40PoundRate) + (Over40PoundRate * (weightInPounds - MaxWeightPounds));
+            }
+            if(hasDiscount)
+            {
+                mainPrice = mainPrice - (mainPrice * .10);
+            }
+            return mainPrice;
         }
 
         /*

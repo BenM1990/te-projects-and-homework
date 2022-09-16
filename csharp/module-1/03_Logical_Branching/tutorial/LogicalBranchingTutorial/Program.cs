@@ -18,27 +18,57 @@ namespace LogicalBranchingTutorial
             Console.WriteLine("**************************************");
 
             // Step Two: Declare and initialize Weather Station variables
-            
+            int highTemperatureF = 55;
+            bool precipitationExpected = true;
+            const int FreezingTemperatureF = 32;
 
 
             // Step Three: Report today's expected conditions to the user.
-            
-
+            Console.WriteLine("Expected high temperature: " + highTemperatureF + "\u00B0F.");
+            if (precipitationExpected)
+            {
+                Console.WriteLine("The chance of precipitation is high.");
+            }
+            else
+            {
+                Console.WriteLine("The chance of precipitation is low.");
+            }
 
             // Step Four: Determine if the user should bring a coat. (when the temperature < 65°F)
-            
+            if (highTemperatureF < 65)
+            {
+                Console.WriteLine("* Don't forget to bring a coat today.");
+            }
 
 
             // Step Five: Determine if the user should bring an umbrella
-            
+            bool isAboveFreezing = highTemperatureF > FreezingTemperatureF;
+            if (precipitationExpected && isAboveFreezing)
+            {
+                Console.WriteLine("* Be sure to pack an umbrella!");
+            }
 
 
             // Step Six: Advise the user on the type of jacket they should be wearing. (<= 0°F, <= freezing, < 65°F)
-            
-
+            if (highTemperatureF <= 0)
+            {
+                Console.WriteLine("* Bundle up! Wear everything you have!");
+            }
+            else if (!isAboveFreezing)
+            {
+                Console.WriteLine("* Please wear a warm winter coat!");
+            }
+            else if (highTemperatureF < 65)
+            {
+                Console.WriteLine("* Take along a light jacket.");
+            }
 
             // Step Seven: If the temperature delta for the day is more than 20°F, advise the user to dress in layers.
-            
+            int lowTemperatureF = 34;
+            if (highTemperatureF - lowTemperatureF > 20)
+            {
+                Console.WriteLine("* Dress in layers today, as the temperature may swing dramatically.");
+            }
 
 
         }

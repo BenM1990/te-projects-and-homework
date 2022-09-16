@@ -10,8 +10,13 @@
         {
             int[] arrayToLoopThrough = { 3, 4, 2, 9 };
 
+            int sum = 0; //scope
+            for(int i = 0; i < arrayToLoopThrough.Length; i++)
+            {
+                sum = sum + arrayToLoopThrough[i];
+            }
 
-            return 0;
+            return sum;
         }
     }
 }

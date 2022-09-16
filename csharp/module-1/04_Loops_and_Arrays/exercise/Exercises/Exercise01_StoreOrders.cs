@@ -6,29 +6,29 @@ namespace Exercises
 {
     public class Exercise01_StoreOrders
     {
-       /*
-       Sally's Pizza is bringing its pizza ordering system into the digital age
-       to get better customer insights.
+        /*
+        Sally's Pizza is bringing its pizza ordering system into the digital age
+        to get better customer insights.
 
-       They've encoded each of Sally's pizzas and other dishes as an integer:
-	   * 10: small, cheese       20: medium, cheese       30: large, cheese
-	   * 11: small, pepperoni    21: medium, pepperoni    31: large, pepperoni
-	   * ---
-	   * 40: calzone
-	   * 41: spaghetti pie
-	   * 42: baked ziti
-       */
+        They've encoded each of Sally's pizzas and other dishes as an integer:
+        * 10: small, cheese       20: medium, cheese       30: large, cheese
+        * 11: small, pepperoni    21: medium, pepperoni    31: large, pepperoni
+        * ---
+        * 40: calzone
+        * 41: spaghetti pie
+        * 42: baked ziti
+        */
 
         // You can use these constants in your solutions.
         private const int SmallCheese = 10;
         private const int SmallPepperoni = 11;
-                
+
         private const int MediumCheese = 20;
         private const int MediumPepperoni = 21;
-                
+
         private const int LargeCheese = 30;
         private const int LargePepperoni = 31;
-                
+
         private const int Calzone = 40;
         private const int SpaghettiPie = 41;
         private const int BakedZiti = 42;
@@ -49,7 +49,8 @@ namespace Exercises
 
         public int[] CreateOrder()
         {
-            return new int[] { };
+
+            return new int[4] { 10, 40, 31, 41 };
         }
 
         /*
@@ -65,7 +66,20 @@ namespace Exercises
         */
         public int GetCalzoneSales(int[] orders)
         {
-            return 0;
+            int calzones = 0;
+            {
+                for (int i = 0; i < orders.Length; i++)
+                {
+                    int currentValue = orders[i];
+                    if (currentValue == 40)
+                    {
+                        calzones += 1;
+                    }
+                }
+            }
+
+
+            return calzones;
         }
 
         /*
@@ -84,7 +98,33 @@ namespace Exercises
         */
         public int GetCheesePizzaRevenue(int[] orders)
         {
-            return 0;
+            int amountMadeOnCheesePizza = 0;
+            {
+                for (int i = 0; i < orders.Length; i++)
+                {
+                    int currentValue = orders[i];
+                    if (currentValue == 10)
+                    {
+                        amountMadeOnCheesePizza += 8;
+                    }
+                    if (currentValue == 20)
+                    {
+                        amountMadeOnCheesePizza += 11;
+                    }
+                    if (currentValue == 30)
+                    {
+                        amountMadeOnCheesePizza += 14;
+                    }
+
+                }
+            }
+            return amountMadeOnCheesePizza;
+
         }
     }
+
 }
+        
+    
+        
+

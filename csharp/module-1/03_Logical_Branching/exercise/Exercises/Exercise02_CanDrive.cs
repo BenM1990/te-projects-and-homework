@@ -25,6 +25,10 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool CanDrive(bool hasPermit, bool withLicensedPassenger)
         {
+            if (hasPermit && withLicensedPassenger)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -38,6 +42,10 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool CanDrive(bool hasPermit, bool withLicensedPassenger, int passengerAge)
         {
+            if (hasPermit && withLicensedPassenger && passengerAge >= 21)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -52,6 +60,10 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool CanDrive(bool hasPermit, bool withLicensedPassenger, int passengerAge, bool isPassengerOurGuardian)
         {
+            if (hasPermit && withLicensedPassenger && passengerAge >= 18 && isPassengerOurGuardian)
+            {
+                return true;
+            }
             return false;
         }
     }
