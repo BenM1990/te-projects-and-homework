@@ -11,7 +11,9 @@
         */
         public string Right2(string str)
         {
-            return null;
+            string lastTwoChars = str.Substring(str.Length - 2, 2);
+            string firstChars = str.Substring(0, str.Length - 2);
+            return lastTwoChars + firstChars; 
         }
     }
 }

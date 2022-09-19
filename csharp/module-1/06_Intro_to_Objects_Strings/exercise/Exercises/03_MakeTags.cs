@@ -12,7 +12,8 @@
         */
         public string MakeTags(string tag, string word)
         {
-            return null;
+            string wordItalic = "<" + tag + ">" + word + "</" + tag + ">";
+            return wordItalic;
         }
     }
 }
