@@ -34,7 +34,41 @@ namespace Exercises
          */
         public string AnimalGroupName(string animalName)
         {
-            return null;
+            Dictionary<string, string> animalNames = new Dictionary<string, string>()
+            {
+                { "Rhino", "Crash" },
+                { "Giraffe", "Tower" },
+                { "Elephant", "Herd"},
+                { "Lion", "Pride" },
+                {  "Crow", "Murder" },
+                { "Pigeon", "Kit" },
+                { "Flamingo", "Pat" },
+                { "Deer", "Herd" },
+                { "Dog", "Pack" },
+                { "Crocodile", "Float" }
+            };
+            
+            IEnumerable<string> groupName = animalNames.Keys;
+
+            if(animalName == "" || animalName == null)
+            {
+                return "unknown";
+            }
+
+            foreach(string animal in groupName) 
+            {
+                if(animalName.ToUpper() == animal.ToUpper())
+                {
+                    return animalNames[animal];
+                }
+            }
+
+            
+                return "unknown";
+            
+
+
+
         }
     }
 }

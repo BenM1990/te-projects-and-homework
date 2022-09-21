@@ -14,7 +14,14 @@ namespace Exercises
          */
         public Dictionary<string, string> BeginningAndEnding(string[] words)
         {
-            return null;
+            Dictionary<string, string> newDictionary = new Dictionary<string, string>();
+
+            foreach(string word in words)
+            {
+                newDictionary[word.Substring(0, 1)] = word.Substring(word.Length - 1, 1);
+            }
+
+            return newDictionary;
         }
     }
 }

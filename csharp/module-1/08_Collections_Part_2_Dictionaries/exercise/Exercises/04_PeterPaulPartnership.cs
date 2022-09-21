@@ -15,7 +15,18 @@ namespace Exercises
          */
         public Dictionary<string, int> PeterPaulPartnership(Dictionary<string, int> peterPaul)
         {
-            return null;
+            IEnumerable<string> names = peterPaul.Keys;
+
+
+            if (peterPaul["Peter"] >= 5000 && peterPaul["Paul"] >= 100000)
+            {
+                peterPaul["PeterPaulPartnership"] = (peterPaul["Peter"] / 4) + (peterPaul["Paul"] / 4);
+                peterPaul["Peter"] -= (peterPaul["Peter"] / 4);
+                peterPaul["Paul"] -= (peterPaul["Paul"] / 4);
+               
+            }
+
+            return peterPaul; 
         }
     }
 }

@@ -18,7 +18,30 @@ namespace Exercises
          */
         public Dictionary<string, int> WordCount(string[] words)
         {
-            return null;
+            Dictionary<string, int> newDictionary = new Dictionary<string, int>();
+
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                //if the dictionary already contains the key
+                if (newDictionary.ContainsKey(words[i]))
+                {
+                    newDictionary[words[i]] ++;
+                    // add 1 to the value
+                    }
+                else
+                {
+                //if the dictionary does NOT contain the key
+                
+                newDictionary[words[i]]=1;
+                        
+                // add the item to the dictionary
+                // when we add a new item the key will be words[i]
+                //when we add a new item the value will start at 1
+                }
+            }    
+
+            return newDictionary;
         }
     }
 }
