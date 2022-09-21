@@ -10,6 +10,7 @@
         */
         public string AltPairs(string str)
         {
+
             return null;
         }
     }

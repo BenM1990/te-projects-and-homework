@@ -9,27 +9,37 @@ namespace CollectionsPart1Tutorial
         {
 
             // Step One: Declare a List
-
+            List<string> nameList = new List<string>();
 
 
 
             // Step Two: Add values to a List
-
+            nameList.Add("Ada");
+            nameList.Add("Grace");
+            nameList.Add("Margaret");
+            nameList.Add("Adele");
+            //list now looks like this - [ "Ada", "Grace", "Margaret", "Adele" ]
 
 
 
             // Step Three: Looping through a List in a for loop
-
+            for (int i = 0; i < nameList.Count; i++)
+            {
+                Console.WriteLine("The name at index " + i + " is " + nameList[i]);
+            }
 
 
 
             // Step Four: Remove an item
-
+            nameList.RemoveAt(0);
 
 
 
             // Step Five: Looping through List in a foreach loop
-
+            foreach (string name in nameList)
+            {
+                Console.WriteLine("Name: " + name);
+            }
 
 
 

@@ -11,6 +11,7 @@
         */
         public string MiddleTwo(string str)
         {
+
             return null;
         }
     }

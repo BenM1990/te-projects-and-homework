@@ -12,7 +12,17 @@ namespace Exercises
         */
         public List<double> ArrayInt2ListDouble(int[] intArray)
         {
-            return null;
+            List<double> intHalfs = new List <double>();
+            for(int i = 0; i < intArray.Length; i++)
+            {
+                
+                intHalfs.Add(intArray[i] / 2.0);
+            }
+            return intHalfs;
+
+
+
+
         }
     }
 }

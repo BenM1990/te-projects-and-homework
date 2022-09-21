@@ -12,7 +12,11 @@
         */
         public string TwoChar(string str, int index)
         {
-            return null;
+
+            string newString = str.Split(index);
+
+                return null;
+            
         }
     }
 }

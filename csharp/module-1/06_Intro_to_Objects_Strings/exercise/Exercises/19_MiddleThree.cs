@@ -11,6 +11,7 @@
         */
         public string MiddleThree(string str)
         {
+
             return null;
         }
     }

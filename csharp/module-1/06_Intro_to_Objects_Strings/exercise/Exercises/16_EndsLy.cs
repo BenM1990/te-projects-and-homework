@@ -10,7 +10,9 @@
         */
         public bool EndsLy(string str)
         {
-            return false;
+            bool endsWithLy = str.EndsWith("ly");
+
+            return endsWithLy;
         }
     }
 }

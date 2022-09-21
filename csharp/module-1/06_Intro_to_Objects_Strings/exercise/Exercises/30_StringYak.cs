@@ -11,7 +11,8 @@
         */
         public string StringYak(string str)
         {
-            return null;
+            string stringWithoutYak = str.Replace("yak", "");
+            return stringWithoutYak;
         }
     }
 }

@@ -11,6 +11,7 @@
         */
         public string WithoutEnd2(string str)
         {
+           
             return null;
         }
     }

@@ -12,7 +12,17 @@ namespace Exercises
         */
         public int FindLargest(List<int> integerList)
         {
-            return -1;
+
+            int largestNumber = 0;
+            foreach(int integer in integerList)
+            {
+                if(integer > largestNumber)
+                {
+                    largestNumber = integer;
+                }
+            }
+            
+            return largestNumber;
         }
     }
 }

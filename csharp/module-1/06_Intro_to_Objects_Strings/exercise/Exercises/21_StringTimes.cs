@@ -10,6 +10,8 @@
         */
         public string StringTimes(string str, int n)
         {
+            
+
             return null;
         }
     }
