@@ -13,7 +13,7 @@
         public string TwoChar(string str, int index)
         {
 
-            string newString = str.Split(index);
+          
 
                 return null;
             
