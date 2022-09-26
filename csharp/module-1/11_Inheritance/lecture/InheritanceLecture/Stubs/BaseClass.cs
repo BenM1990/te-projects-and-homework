@@ -3,6 +3,10 @@
     // A base class is defined
     // - The base class is inherited by other classes, in this case the SkeletonClass
 
+    // Inheritance
+    // the act of having one class adopt the properties and methods of another class
+    // this prevents code duplication and allows you to share code across classes while having the source code live in only one class file
+
     public class BaseClass
     {
         // Private BaseClass Variables

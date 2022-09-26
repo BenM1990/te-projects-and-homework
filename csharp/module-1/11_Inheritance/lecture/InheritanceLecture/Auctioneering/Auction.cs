@@ -8,6 +8,8 @@ namespace InheritanceLecture.Auctioneering
     /// </summary>
     public class Auction
     {
+
+      
         /// <summary>
         /// This is an encapsulated field that holds all placed bids.
         /// </summary>
@@ -36,20 +38,49 @@ namespace InheritanceLecture.Auctioneering
         /// </summary>
         /// <param name="offeredBid">The bid to place.</param>
         /// <returns>True if the new bid is the current winning bid</returns>
-        public bool PlaceBid(Bid offeredBid)
+        public virtual bool PlaceBid(Bid offeredBid)
         {
+            //Only accept bids if the auction has not ended
+
+            bool newHighBidPlaced = false;
             // Print out the bid details.
+            // biddername + amount in currency format.
             Console.WriteLine(offeredBid.Bidder + " bid " + offeredBid.BidAmount.ToString("C"));
+            
+            //if(!HasEnded) also works
+            if(HasEnded == false)
+            {
+                // Record it as a bid by adding it to allBids
+                allBids.Add(offeredBid);
 
-            // Record it as a bid by adding it to allBids
 
-            // Check to see IF the offered bid is higher than the current bid amount
-                // if yes, set offered bid as the current high bid
-
+                // Check to see IF the offered bid is higher than the current bid amount
+                if (offeredBid.BidAmount > CurrentHighBid.BidAmount)
+                {
+                    // if yes, set offered bid as the current high bid
+                    CurrentHighBid = offeredBid;
+                    newHighBidPlaced = true;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Bid not accepted - Auction has ended.");
+            }
             // Output the current high bid
-
+            Console.WriteLine($"Current highest bid {CurrentHighBid.BidAmount.ToString("C")} by {CurrentHighBid.Bidder}");
             // Return if this is the new highest bid
-            return false;
+            return newHighBidPlaced;
+        }
+
+
+        //TO DO - Stop accepting bids once auction has ended
+
+        public void EndAuction()
+        {
+            //End the auction
+            HasEnded = true;
+            //Annouce the winner
+            Console.WriteLine($"Auction is finished, {CurrentHighBid.Bidder} has won with a bid of {CurrentHighBid.BidAmount.ToString("C")}.");
         }
     }
 }
