@@ -1,6 +1,6 @@
 namespace BankTellerExercise
 {
-    public class SavingsAccount : BankAccount
+    public class SavingsAccount : BankAccount, IAccountable
     {
         public SavingsAccount(string accountHolder, string accountNumber) : base(accountHolder, accountNumber)
         {

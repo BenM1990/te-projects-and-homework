@@ -6,14 +6,14 @@ namespace TechElevator.Bookstore
 {
     public class ShoppingCart
     {
-        private List<MediaItem> itemsToBuy = new List<MediaItem>();
+        private List<IPurchasable> itemsToBuy = new List<IPurchasable>();
 
         public decimal TotalPrice
         {
             get
             {
                 decimal total = 0.0M;
-                foreach (MediaItem item in this.itemsToBuy)
+                foreach (IPurchasable item in this.itemsToBuy)
                 {
                     total += item.Price;
                 }
@@ -21,7 +21,7 @@ namespace TechElevator.Bookstore
             }
         }
 
-        public void Add(MediaItem itemToAdd)
+        public void Add(IPurchasable itemToAdd)
         {
             itemsToBuy.Add(itemToAdd);
         }
@@ -29,7 +29,7 @@ namespace TechElevator.Bookstore
         public string GetReceipt()
         {
             string receipt = "Receipt\n";
-            foreach (MediaItem item in this.itemsToBuy)
+            foreach (IPurchasable item in this.itemsToBuy)
             {
                 receipt += item;
                 receipt += "\n";

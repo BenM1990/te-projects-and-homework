@@ -1,6 +1,6 @@
 ﻿namespace TechElevator.Bookstore
 {
-    public class MediaItem
+    public class MediaItem : IPurchasable
     {
 
         // Add the properties
