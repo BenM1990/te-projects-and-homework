@@ -11,9 +11,29 @@ namespace Lecture
             // OLD MACDONALD
             //
 
+            Cow sirloin = new Cow();
+            Chicken frederick = new Chicken();
+            Pig bacon = new Pig();
+            Cat philco = new Cat();
+            Tractor internationalHarvester = new Tractor();
+
+            philco.Sleep(true); /// Phil is down for a nap
+            bacon.Sleep(true);
+
+            FarmAnimal farmCow = new Cow(); // a cow is a farm animal, so we can fit a cow object into a farm animal shape bucket
+            Cow farmCowTwo = new Cow(); // not much functional difference
+
+            FarmAnimal[] farmAnimals = new FarmAnimal[] { sirloin, frederick, bacon };
+
+            Console.WriteLine(philco.Eat());
+            Console.WriteLine(frederick.Eat());
+
+            ShaggyCow shaggyCow = new ShaggyCow();
+            Console.WriteLine(shaggyCow.Sound);
+
             ISingable[] singables = new ISingable[]
             {
-                new Cow(), new Chicken(), new Pig(), new Tractor()
+                sirloin, frederick, bacon, philco, internationalHarvester
             };
 
             foreach(ISingable singable in singables)

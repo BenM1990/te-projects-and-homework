@@ -6,6 +6,9 @@ namespace ShippingCompany
     {
         static void Main(string[] args)
         {
+            TruckDelivery myDelivery = new TruckDelivery();
+
+            
 
         }
     }
