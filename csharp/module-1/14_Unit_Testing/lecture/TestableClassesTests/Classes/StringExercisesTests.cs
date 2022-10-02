@@ -15,6 +15,42 @@ namespace TestableClasses.Classes.Tests
         //.IsNotNull()
         //.IsNull()
 
+                /*
+        Given two strings, a and b, return the result of putting them together in the order abba,
+        e.g. "Hi" and "Bye" returns "HiByeByeHi".
+        makeAbba("Hi", "Bye") → "HiByeByeHi"
+        makeAbba("Yo", "Alice") → "YoAliceAliceYo"
+        makeAbba("What", "Up") → "WhatUpUpWhat"
+        */
+        [TestMethod]
+        public void MakeAbbaTest()
+        {
+            //Arrange
+            StringExercises stringExercises = new StringExercises(); // object
+
+            //Act
+            string result = stringExercises.MakeAbba("Hi", "Bye");
+
+            //Assert
+            Assert.AreEqual("HiByeByeHi", result);
+
+        }
+
+
+        [TestMethod]
+        public void MakeAbbaTestKnownFailure()
+        {
+            //Arrange
+            StringExercises stringExercises = new StringExercises(); // object
+
+            //Act
+            string resultTwo = stringExercises.MakeAbba("What", "Up");
+
+            //Assert
+            Assert.AreEqual("UpWhatWhatUp", resultTwo, "Please Try Again Idiot"); // fails but also gives a message
+        }
+
+
 
 
     }
