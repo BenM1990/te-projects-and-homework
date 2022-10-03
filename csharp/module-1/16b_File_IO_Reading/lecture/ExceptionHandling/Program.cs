@@ -25,10 +25,11 @@ namespace ExceptionHandling
                 Console.WriteLine(cities[3]);  // This statement will throw an IndexOutOfRangeException
                 Console.WriteLine("are all in Ohio."); // This line won't execute because the previous statement throws an Exception
             }
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException e) // type of exceptiom -> IndexOutOfRangeEx -> e
             {
                 // Flow of control resumes here after the Exception is thrown
                 Console.WriteLine("XXX   Uh-oh, something went wrong...   XXX");
+                Console.WriteLine(e.Message);
             }
 
             Console.WriteLine();
@@ -70,6 +71,7 @@ namespace ExceptionHandling
             {   // If a FormatException is thrown by int.Parse(...)
                 // it will be caught here since FormatException "is-a" Exception
                 Console.WriteLine("You did it wrong...");
+                Console.WriteLine(e.Message);
             }
 
             Console.WriteLine();

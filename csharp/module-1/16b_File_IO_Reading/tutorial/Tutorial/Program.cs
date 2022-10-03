@@ -26,6 +26,18 @@ namespace FileIOReadingTutorial
             /*
             Step 2: Step Two: Open the book file and handle errors
             */
+            try
+            {
+                
+                using (StreamReader fileInput = new StreamReader(filePath))
+                {
+                    // Loop until the end of file is reached
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
 
         }
