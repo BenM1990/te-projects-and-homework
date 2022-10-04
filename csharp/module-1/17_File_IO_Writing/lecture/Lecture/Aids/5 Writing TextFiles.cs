@@ -10,6 +10,35 @@ namespace Lecture.Aids
         */
         public static void WritingAFile()
         {
+            //setup
+            string directory = Environment.CurrentDirectory;
+            //you could also add the file path for directory with @" .. " // @ will avoid code confusion with " / " in your path.
+            string fileName = "output.txt";
+
+            string fullPath = Path.Combine(directory, fileName);
+
+
+            try
+            {
+                //make sure to use the using statement
+                using(StreamWriter sw = new StreamWriter(fullPath)) //output.txt will be created since it doesn't exist
+                {
+                    sw.WriteLine("This is the start of my first file!"); //writes a line to the file
+
+                    sw.Write("Hello ");
+                    sw.Write("World!"); // I should get "Hello World!" on one line with these two lines here
+
+                    sw.WriteLine();// one empty line at the end
+
+                    sw.Write("Tech Elevator!");
+                }
+
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine("Oops, something went wrong writing output.txt.");
+            }
+
 
 
             // After the using statement ends, file has now been written

@@ -17,18 +17,18 @@ namespace Lecture.Aids
         {
             Dictionary<string, double> programmingLanguages = new Dictionary<string, double>()
             {
-                {"Java", 100.0 },
+                {"Java", 0 },
                 {"C", 99.9 },
                 {"C++", 99.4 },
                 {"Python", 96.5 },
-                {"C#", 91.3 },
+                {"C#", 100 },
                 {"R", 84.8 },
                 {"PHP", 84.5 },
                 {"JavaScript", 83.0 },
                 {"Ruby", 76.2 },
                 {"Matlab", 72.4 }
             };
-            string directory = Environment.CurrentDirectory;
+            string directory = Environment.CurrentDirectory; // remember, this is the current directory where the program is running, not where the files we see live
             string filename = "programminglanguages.txt";
             string path = Path.Combine(directory, filename);
 
