@@ -23,6 +23,12 @@ namespace VariablesDatatypesTutorial
             // Step 2: Calculate the sales tax and tip
             /******************************************************************************/
 
+            const double SalesTaxPercent = 7.5;
+            double taxAmount;
+            taxAmount = SalesTaxPercent / 100 * costOfDinner;
+            double tipAmount = tipPercent / 100 * costOfDinner;
+            Console.WriteLine("Tax: $" + taxAmount);
+            Console.WriteLine("Tip: $" + tipAmount);
 
 
 
