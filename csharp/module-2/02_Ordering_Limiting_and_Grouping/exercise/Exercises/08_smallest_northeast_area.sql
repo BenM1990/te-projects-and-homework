@@ -2,3 +2,5 @@
 -- Expected answer is around 4,000
 -- (1 row)
 
+--SELECT * FROM state;
+SELECT MIN(area) AS 'smallest_northeast_area' FROM state WHERE census_region = 'Northeast' GROUP BY census_region;

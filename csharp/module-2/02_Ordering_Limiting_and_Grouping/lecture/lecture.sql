@@ -1,69 +1,92 @@
 -- ORDERING RESULTS
 
 -- Populations of all states from largest to smallest.
-
+--SELECT * FROM state;
+SELECT state_abbreviation, population FROM state ORDER BY population DESC;
 
 -- States sorted alphabetically (A-Z) within their census region. The census regions are sorted in reverse alphabetical (Z-A) order.
-
+SELECT state_name, census_region FROM state ORDER BY census_region DESC, state_name;
 
 -- The biggest park by area
+--SELECT * FROM park;
+SELECT TOP 1 area FROM park ORDER BY area DESC;
+SELECT TOP 1 * FROM park ORDER BY area DESC;
 
-
+--The parks in order from largest to smallest;
+SELECT * FROM park ORDER BY area DESC;
 
 -- LIMITING RESULTS
 
 -- The 10 largest cities by populations
+SELECT * FROM city;
+SELECT TOP 10 * FROM city ORDER BY population DESC;
 
 
 -- The 20 oldest parks from oldest to youngest in years, sorted alphabetically by name.
-
+SELECT TOP 20 park_name, (YEAR(GETDATE()) - YEAR(date_established)) AS age_in_years FROM park ORDER BY age_in_years DESC, park_name;
 
 
 
 -- CONCATENATING OUTPUTS
 
 -- All city names and their state abbreviation.
-
+SELECT (city_name + ', ' + state_abbreviation) AS city_and_state FROM city;
 
 -- All park names and area
-
+SELECT ('Name: ' + park_name + ', Area: ' + CAST(area as VARCHAR)) AS park_and_area FROM park;
 
 -- The census region and state name of all states in the West & Midwest sorted in ascending order.
-
+SELECT (census_region + ': ' + state_name) AS census_region_state_name FROM state WHERE census_region IN ('West', + 'Midwest') ORDER BY census_region_state_name;
 
 
 -- AGGREGATE FUNCTIONS
 
 -- Average population across all the states. Note the use of alias, common with aggregated values.
-
+SELECT AVG(population) AS average_population FROM state;
 
 -- Total population in the West and South census regions
-
+SELECT SUM(population) AS west_and_south_population_sum FROM state WHERE census_region IN ('South', 'West');
 
 -- The number of cities with populations greater than 1 million
+--SELECT * FROM city;
+SELECT COUNT(*) AS big_cities_count FROM city WHERE population > 1000000;
 
 
 -- The number of state nicknames.
-
+SELECT COUNT(state_nickname) AS states_with_nicknames FROM state WHERE state_nickname IS NOT NULL;
+SELECT COUNT(state_nickname) FROM state; -- null values are not counted
 
 -- The area of the smallest and largest parks.
+SELECT MIN(area) AS smallest_park, MAX(area) AS largest_park FROM park;
+
+
+
 
 
 
 -- GROUP BY
 
 -- Count the number of cities in each state, ordered from most cities to least.
+SELECT count(city_name) AS number_of_cities, state_abbreviation FROM city GROUP BY state_abbreviation ORDER BY number_of_cities DESC;
 
 
 -- Determine the average park area depending upon whether parks allow camping or not.
-
+SELECT AVG(area) AS average_area, has_camping FROM park GROUP BY has_camping;
 
 -- Sum of the population of cities in each state ordered by state abbreviation.
-
+SELECT SUM(population) AS cities_population, state_abbreviation FROM city GROUP BY state_abbreviation ORDER BY state_abbreviation;
 
 -- The smallest city population in each state ordered by city population.
+SELECT MIN(population) AS smallest_city_pop, state_abbreviation FROM city GROUP BY state_abbreviation ORDER BY smallest_city_pop;
 
-
+/*
+ORDER OF SQL Operations (DIFFERENT THAN THE ORDER WE WRITE CLAUSES IN) SFWGO
+FROM: where is our data coming from? -> city table
+WHERE: out of all the data in our city table... narrow it down to rows where the state_abbreviation is not null
+GROUP BY: tale the state_abreviation and organize the data based on the value of state_abbreviation ... and...
+SELECT: the aggrigate value (the smallest city population) and the state abbreviation and put them into the results set
+ORDER BY: the value of the smallest city population (ascending)  
+*/
 
 -- Miscelleneous
 
@@ -79,6 +102,14 @@
 -- SUBQUERIES (optional)
 
 -- Include state name rather than the state abbreviation while counting the number of cities in each state,
+SELECT COUNT(city_name) AS number_of_cities,
+	(
+	SELECT state_name FROM state AS state_table WHERE state_table.state_abbreviation = city_table.state_abbreviation
+	) 
+	AS state_name
+FROM city AS city_table
+GROUP BY state_abbreviation 
+ORDER BY number_of_cities DESC;
 
 
 -- Include the names of the smallest and largest parks

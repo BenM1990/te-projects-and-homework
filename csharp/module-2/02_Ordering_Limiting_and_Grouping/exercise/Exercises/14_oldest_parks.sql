@@ -2,3 +2,6 @@
 -- Order the results with the oldest park first.
 -- (10 rows)
 
+--SELECT * FROM park;
+
+SELECT TOP 10 park_name, date_established FROM park ORDER BY date_established ASC;

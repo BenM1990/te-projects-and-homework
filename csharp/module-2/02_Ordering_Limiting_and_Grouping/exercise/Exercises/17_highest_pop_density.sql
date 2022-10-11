@@ -3,3 +3,6 @@
 -- Exepcted answer is around 4,000
 -- (1 row)
 
+--SELECT * FROM state;
+
+SELECT MAX(population / area) AS population_density FROM state;
