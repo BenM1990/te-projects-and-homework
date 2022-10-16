@@ -2,3 +2,8 @@
 -- Order the results by movie title (A-Z)
 -- (73 rows)
 
+SELECT title, person_name AS person_name FROM person
+JOIN movie_actor ON movie_actor.actor_id = person.person_id
+JOIN movie ON movie_actor.movie_id = movie.movie_id
+WHERE movie_actor.actor_id = movie.director_id
+ORDER BY title;
