@@ -6,8 +6,8 @@ namespace Tutorial.DAO
     public interface ICustomerDao
     {
         // Step Four: Add a new DAO method
-        
 
+        Customer GetCustomer(int customerId);
 
         /// <summary>
         /// Get customers whose first or last names include the given search string.

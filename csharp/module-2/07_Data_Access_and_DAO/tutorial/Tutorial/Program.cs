@@ -13,7 +13,7 @@ namespace Tutorial
         static void Main(string[] args)
         {
             // Step One: Configure the database connection
-            string connectionString = "";
+            string connectionString = @"Server=.\SQLEXPRESS;Database=PizzaShop;Trusted_Connection=True;";
 
             Program program = new Program(connectionString);
             program.Run();
@@ -30,15 +30,22 @@ namespace Tutorial
             Console.WriteLine($"Total Sales: ${saleDao.GetTotalSales()}");
 
             // Step Three: Copy returned values into an object
-            
+            Sale sale50 = saleDao.GetSale(50);
+            Console.WriteLine(sale50);
 
 
             // Step Four: Add a new DAO method
-            
 
+            Customer customerForSale50 = customerDao.GetCustomer(sale50.CustomerId.Value);
+            Console.WriteLine($"Customer for that sale was {customerForSale50}");
 
             // Step Five: Call a DAO method that returns a List
-            
+            IList<Customer> matchingCustomers = customerDao.FindCustomersByName("Ma");
+            Console.WriteLine("All customers with \"Ma\" in their first or last name:");
+            foreach (Customer customer in matchingCustomers)
+            {
+                Console.WriteLine(customer);
+            }
 
         }
     }

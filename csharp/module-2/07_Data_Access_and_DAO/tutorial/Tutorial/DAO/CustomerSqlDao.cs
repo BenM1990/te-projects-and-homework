@@ -15,7 +15,29 @@ namespace Tutorial.DAO
         }
 
         // Step Four: Add a new DAO method
-        
+        public Customer GetCustomer(int customerId)
+        {
+            Customer customer = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT customer_id, first_name, last_name, street_address, city, " +
+                                                "phone_number, email_address, email_offers " +
+                                                "FROM customer " +
+                                                "WHERE customer_id = @customer_id;", conn);
+                cmd.Parameters.AddWithValue("@customer_id", customerId);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    customer = CreateCustomerFromReader(reader);
+                }
+            }
+
+            return customer;
+        }
 
 
 

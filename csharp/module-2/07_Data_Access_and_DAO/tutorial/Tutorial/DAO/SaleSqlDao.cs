@@ -21,7 +21,7 @@ namespace Tutorial.DAO
             {
                 conn.Open();
                 // Step Two: Add SQL for retrieving total sales
-                SqlCommand cmd = new SqlCommand("SELECT 0;", conn);
+                SqlCommand cmd = new SqlCommand("SELECT SUM(total) FROM sale;", conn);
 
                 totalSales = Convert.ToDecimal(cmd.ExecuteScalar());
             }
@@ -56,9 +56,20 @@ namespace Tutorial.DAO
         {
             Sale sale = new Sale();
             // Step Three: Copy returned values into an object
-            
+            sale.SaleId = Convert.ToInt32(reader["sale_id"]);
+            sale.Total = Convert.ToDecimal(reader["total"]);
+            sale.IsDelivery = Convert.ToBoolean(reader["is_delivery"]);
+            if (reader["customer_id"] is DBNull)
+            {
+                sale.CustomerId = null;
+            }
+            else
+            {
+                sale.CustomerId = Convert.ToInt32(reader["customer_id"]);
+            }
 
-            
+
+
             return sale;
         }
     }

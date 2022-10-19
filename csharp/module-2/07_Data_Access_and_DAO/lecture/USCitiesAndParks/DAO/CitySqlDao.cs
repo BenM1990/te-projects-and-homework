@@ -9,36 +9,38 @@ namespace USCitiesAndParks.DAO
     {
         private readonly string connectionString;
 
-        public CitySqlDao(string connString)
+        public CitySqlDao(string connString) //CitySqlDao instantiated in Program.cs and that's where the connection string comes from
         {
             connectionString = connString;
         }
 
+        //method to retrieve city data from the database
         public City GetCity(int cityId)
         {
             City city = null;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                conn.Open();
+                conn.Open(); // open the connection to the DB
+
                 SqlCommand cmd = new SqlCommand("SELECT city_id, city_name, state_abbreviation, population, area FROM city WHERE city_id = @city_id;", conn);
-                cmd.Parameters.AddWithValue("@city_id", cityId);
+                cmd.Parameters.AddWithValue("@city_id", cityId); //add a value for the SQL parameter of @city_id in the query string above
 
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader(); //runs the SQL query against the database
 
-                if (reader.Read())
+                if (reader.Read()) // if we can actually read the result set (no errors, data rows exist)
                 {
-                    city = CreateCityFromReader(reader);
+                    city = CreateCityFromReader(reader); //go create a city object from the results
                 }
             }
-            return city;
+            return city; //return the city object
         }
 
         public IList<City> GetCitiesByState(string stateAbbreviation)
         {
             IList<City> cities = new List<City>();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString)) //conn is the name we are giving the connection
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT city_id, city_name, state_abbreviation, population, area FROM city WHERE state_abbreviation = @state_abbreviation;", conn);
