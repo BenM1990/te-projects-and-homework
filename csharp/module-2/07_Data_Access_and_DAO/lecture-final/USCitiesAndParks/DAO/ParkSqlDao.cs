@@ -64,6 +64,7 @@ namespace USCitiesAndParks.DAO
 
         public Park CreatePark(Park park)
         {
+<<<<<<< HEAD
             //we want to return a park object
             //we also take in a park object
             //should we return the same park object as we took in? -> no
@@ -89,10 +90,39 @@ namespace USCitiesAndParks.DAO
                 //return newParkId                    ----> other way of returning
             }
             return GetPark(newParkId);
+=======
+            //we want to return a park object 
+            //we also take in a park object
+            //should we return the same park object as what we took in? -> no
+            //we want to put the park object we took in into the database, and then make sure it got there okay by retrieving the data and giving it back instead
+            int newParkId; 
+            using (SqlConnection khan = new SqlConnection(connectionString))
+            {
+                khan.Open();
+
+                SqlCommand kirk = new SqlCommand("INSERT INTO park(park_name, date_established, area, has_camping) " +
+                    "OUTPUT INSERTED.park_id VALUES(@park_name, @date_established, @area, @has_camping);", khan);
+                kirk.Parameters.AddWithValue("@park_name", park.ParkName);
+                kirk.Parameters.AddWithValue("@date_established", park.DateEstablished);
+                kirk.Parameters.AddWithValue("@area", park.Area);
+                kirk.Parameters.AddWithValue("@has_camping", park.HasCamping);
+
+                //ExecuteScalar() since we expect the id back from the query
+                newParkId = Convert.ToInt32(kirk.ExecuteScalar()); //need to do the conversion to a data type that C# understands 
+
+
+            }
+
+            Park newPark = GetPark(newParkId); //we wrote a method for getting a specific park from the DB, so let's use it
+            return newPark;
+
+
+>>>>>>> 9ac605afbc01f26eb9db03c784d31f0cbb4bb132
         }
 
         public void UpdatePark(Park park)
         {
+<<<<<<< HEAD
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -106,6 +136,26 @@ namespace USCitiesAndParks.DAO
 
                 cmd.ExecuteNonQuery(); //returns # of rows changed, but not doing anything with that information
             }
+=======
+            
+            using (SqlConnection conn = new SqlConnection(connectionString)) 
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE park SET park_name = @park_name, " +
+                    "date_established = @date_established, area = @area, has_camping = @has_camping " +
+                    "WHERE park_id = @park_id", conn);
+                cmd.Parameters.AddWithValue("@park_name", park.ParkName);
+                cmd.Parameters.AddWithValue("@date_established", park.DateEstablished);
+                cmd.Parameters.AddWithValue("@area", park.Area);
+                cmd.Parameters.AddWithValue("@has_camping", park.HasCamping); 
+                cmd.Parameters.AddWithValue("@park_id", park.ParkId);
+
+                cmd.ExecuteNonQuery(); //don't bother saving the number of rows changed anywhere, just exec the query
+            }
+
+
+
+>>>>>>> 9ac605afbc01f26eb9db03c784d31f0cbb4bb132
         }
 
         public void DeletePark(int parkId)
@@ -113,6 +163,7 @@ namespace USCitiesAndParks.DAO
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+<<<<<<< HEAD
 
                 SqlCommand cmd = new SqlCommand("DELETE FROM park_state WHERE park_id = @park_id;" + 
                                                 "DELETE FROM park WHERE park_id = @park_id;", conn);
@@ -122,10 +173,21 @@ namespace USCitiesAndParks.DAO
                 cmd.ExecuteNonQuery();
 
             }
+=======
+                //delete the park from park_state first and destory the relationship between the tables, and then delete the park 
+                SqlCommand cmd = new SqlCommand("DELETE FROM park_state WHERE park_id = @park_id;" +
+                    "DELETE FROM park WHERE park_id = @park_id;", conn);
+                cmd.Parameters.AddWithValue("@park_id", parkId);
+
+                cmd.ExecuteNonQuery(); //no results back, I just want to DESTROY STUFF >:(
+            }
+
+>>>>>>> 9ac605afbc01f26eb9db03c784d31f0cbb4bb132
         }
 
         public void AddParkToState(int parkId, string state_abbreviation)
         {
+<<<<<<< HEAD
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -135,11 +197,23 @@ namespace USCitiesAndParks.DAO
                 cmd.Parameters.AddWithValue("@state_abbreviation", state_abbreviation);
 
                 cmd.ExecuteNonQuery();
+=======
+            //INSERT INTO park_state(park_id, state_abbreviation) VALUES(1, OH)
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO park_state(park_id, state_abbreviation) VALUES(@park_id, @state_abbreviation)", conn);
+                cmd.Parameters.AddWithValue("@park_id", parkId);
+                cmd.Parameters.AddWithValue("@state_abbreviation", state_abbreviation);
+
+                cmd.ExecuteNonQuery(); //no results back, I just want to run the command against the database
+>>>>>>> 9ac605afbc01f26eb9db03c784d31f0cbb4bb132
             }
         }
 
         public void RemoveParkFromState(int parkId, string state_abbreviation)
         {
+<<<<<<< HEAD
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -151,6 +225,21 @@ namespace USCitiesAndParks.DAO
                 cmd.ExecuteNonQuery();
 
             }
+=======
+            //wtf is this for????????? it never gets called >:( 
+
+            //DELETE FROM park_state WHERE park_id = 70; 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM park_state WHERE park_id = @park_id AND state_abbreviation = @state_abbreviation; ", conn);
+                cmd.Parameters.AddWithValue("@park_id", parkId);
+                cmd.Parameters.AddWithValue("@state_abbreviation", state_abbreviation);
+
+                cmd.ExecuteNonQuery(); //no results back, I just want to run the command against the database
+            }
+
+>>>>>>> 9ac605afbc01f26eb9db03c784d31f0cbb4bb132
         }
 
         private Park CreateParkFromReader(SqlDataReader reader) //make a park object out of row of SQL data
