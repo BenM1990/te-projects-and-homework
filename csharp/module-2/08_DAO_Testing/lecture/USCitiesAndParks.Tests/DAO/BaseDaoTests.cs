@@ -19,11 +19,12 @@ namespace USCitiesAndParks.Tests
         /// </summary>
         private TransactionScope transaction;
 
-        [AssemblyInitialize]
+        [AssemblyInitialize] // this will run before any of the tests in the project
         public static void BeforeAllTests(TestContext context)
         {
             string sql = File.ReadAllText("create-test-db.sql").Replace("test_db_name", DatabaseName);
 
+            // make the UnitedStatesTesting database
             using (SqlConnection conn = new SqlConnection(AdminConnectionString))
             {
                 conn.Open();
@@ -32,6 +33,8 @@ namespace USCitiesAndParks.Tests
                 cmd.ExecuteNonQuery();
             }
 
+
+            //load test data into UnitedStatesTesting
             sql = File.ReadAllText("test-data.sql");
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -41,10 +44,10 @@ namespace USCitiesAndParks.Tests
             }
         }
 
-        [AssemblyCleanup]
+        [AssemblyCleanup] //runs after all the tests have been complete and things are being disposed of
         public static void AfterAllTests()
         {
-            // drop the temporary database
+            // drop the temporary database (UnitedStatesTesting)
             string sql = File.ReadAllText("drop-test-db.sql").Replace("test_db_name", DatabaseName);
 
             using (SqlConnection conn = new SqlConnection(AdminConnectionString))
@@ -56,7 +59,7 @@ namespace USCitiesAndParks.Tests
         }
 
 
-        [TestInitialize]
+        [TestInitialize] // runs before each test
         public virtual void Setup()
         {
             // Begin the transaction
@@ -64,7 +67,7 @@ namespace USCitiesAndParks.Tests
 
         }
 
-        [TestCleanup]
+        [TestCleanup] //runs after each test
         public void Cleanup()
         {
             // Roll back the transaction

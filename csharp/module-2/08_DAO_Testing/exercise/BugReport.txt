@@ -1,43 +1,45 @@
 Bug 1
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: GetTimeSheetsByProjectID_ReturnsListOfAllTimesheetsFor Projects
 
-Expected output:
+Expected output: 2
 
-Actual output:
+Actual output: 1
 
 How did you fix this bug?
+
+In TimesheetSqlDao I found that the WHERE part of the SQL statement was incorrect and changed it to WHERE project_id = @project_id
 
 
 Bug 2
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: UpdateTimesheet
 
-Expected output:
+Expected output: False
 
-Actual output:
+Actual output: True
 
 How did you fix this bug?
 
 
 Bug 3
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: GetBillableHours
 
-Expected output:
+Expected output: 2
 
-Actual output:
+Actual output: 2.50
 
-How did you fix this bug?
+How did you fix this bug? Changed Execute to ExecuteScalar
 
 
 Bug 4
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: CreateTimesheet_ReturnsTimesheetWithIdAndExpectedValues
 
 Expected output:
-
+****GAVE ME A FLAG THAT IT COULD NOT CAST
 Actual output:
 
-How did you fix this bug?
+How did you fix this bug? Changed the execute to a NonQuery
 

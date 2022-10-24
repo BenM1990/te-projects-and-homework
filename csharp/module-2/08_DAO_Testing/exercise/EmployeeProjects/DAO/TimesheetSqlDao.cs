@@ -73,7 +73,7 @@ namespace EmployeeProjects.DAO
 
                 SqlCommand cmd = new SqlCommand("SELECT timesheet_id, employee_id, project_id, date_worked, hours_worked, is_billable, description " +
                                                 "FROM timesheet " +
-                                                "WHERE employee_id = @project_id " +
+                                                "WHERE project_id = @project_id " +
                                                 "ORDER BY timesheet_id;", conn);
                 cmd.Parameters.AddWithValue("@project_id", projectId);
 
@@ -106,7 +106,7 @@ namespace EmployeeProjects.DAO
                 cmd.Parameters.AddWithValue("@is_billable", newTimesheet.IsBillable);
                 cmd.Parameters.AddWithValue("@description", newTimesheet.Description);
 
-                newTimesheetId = Convert.ToInt32(cmd.ExecuteScalar());
+                newTimesheetId = Convert.ToInt32(cmd.ExecuteNonQuery());
             }
             return GetTimesheet(newTimesheetId);
         }
@@ -118,7 +118,7 @@ namespace EmployeeProjects.DAO
 
                 SqlCommand cmd = new SqlCommand("UPDATE timesheet " +
                                                 "SET employee_id = @employee_id, project_id = @project_id, date_worked = @date_worked, " +
-                                                "hours_worked = @hours_worked, description = @description " +
+                                                "hours_worked = @hours_worked, description = @description, is_billable = @is_billable " +
                                                 "WHERE timesheet_id = @timesheet_id;", conn);
                 cmd.Parameters.AddWithValue("@employee_id", updatedTimesheet.EmployeeId);
                 cmd.Parameters.AddWithValue("@project_id", updatedTimesheet.ProjectId);
