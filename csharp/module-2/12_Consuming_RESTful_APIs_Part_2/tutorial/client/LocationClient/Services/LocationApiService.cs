@@ -24,22 +24,47 @@ namespace LocationClient.Services
         {
             RestRequest requestOne = new RestRequest($"locations/{locationId}");
             IRestResponse<Location> response = client.Get<Location>(requestOne);
+            CheckForError(response);
+            // If CheckForError did not throw, success
             return response.Data;
         }
 
         public Location AddLocation(Location newLocation)
         {
-            throw new NotImplementedException("The api method has not yet been implemented.");
+            RestRequest request = new RestRequest("locations");
+            request.AddJsonBody(newLocation);
+            IRestResponse<Location> response = client.Post<Location>(request);
+            return response.Data;
         }
 
         public Location UpdateLocation(Location locationToUpdate)
         {
-            throw new NotImplementedException("The api method has not yet been implemented.");
+            RestRequest request = new RestRequest($"locations/{locationToUpdate.Id}");
+            request.AddJsonBody(locationToUpdate);
+            IRestResponse<Location> response = client.Put<Location>(request);
+            return response.Data;
         }
 
         public bool DeleteLocation(int locationId)
         {
-            throw new NotImplementedException("The api method has not yet been implemented.");
+            RestRequest request = new RestRequest($"locations/{locationId}");
+            IRestResponse response = client.Delete(request);
+            return true;
+        }
+
+        private void CheckForError(IRestResponse response)
+        {
+            if (response.ResponseStatus != ResponseStatus.Completed)
+            {
+                //response not received
+                throw new Exception("An error occurred - unable to reach the server.", response.ErrorException);
+            }
+            else if (!response.IsSuccessful)
+            {
+                //response indicating an error
+                throw new Exception("An error response was received from the server. The status code is " + (int)response.StatusCode);
+            }
+            return;
         }
     }
 }

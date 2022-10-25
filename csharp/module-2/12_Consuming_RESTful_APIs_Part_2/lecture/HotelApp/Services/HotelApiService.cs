@@ -28,16 +28,16 @@ namespace HotelReservationsClient.Services
             return response.Data;
         }
 
-        public List<Reservation> GetReservations(int hotelId = 0)
+        public List<Reservation> GetReservations(int hotelId = 0) //default value for the parameter
         {
             string url;
             if (hotelId != 0)
             {
-                url = $"hotels/{hotelId}/reservations";
+                url = $"hotels/{hotelId}/reservations"; //if a hotel id is passed in, get the reservations just for that hotel
             }
             else
             { 
-                url = "reservations";
+                url = "reservations"; //if not get all the reservations for the hotels
             }
 
             RestRequest request = new RestRequest(url);
@@ -58,17 +58,35 @@ namespace HotelReservationsClient.Services
 
         public Reservation AddReservation(Reservation newReservation)
         {
-            throw new NotImplementedException();
+            //build a request and send it to http://localhost:3000/reservations
+            //the endpoint path doesn't change, but the HTTP method does depending on actions we want to take
+            RestRequest request = new RestRequest("reservations");
+            request.AddJsonBody(newReservation); //attach the data to the request
+            IRestResponse<Reservation> response = client.Post<Reservation>(request);//
+            //check for success
+            CheckForError(response, $"Add reservation for {newReservation.HotelId}");
+            // we know that when we POST that endpoint, we get a reservation object back with a reservation id
+            return response.Data;
+            
         }
 
         public Reservation UpdateReservation(Reservation reservationToUpdate)
         {
-            throw new NotImplementedException();
+            //http://localhost:3000/reservations/:id
+            RestRequest request = new RestRequest($"reservations/{reservationToUpdate.Id}");
+            request.AddJsonBody(reservationToUpdate); //add the object that is being updated
+            IRestResponse<Reservation> response = client.Put<Reservation>(request); // keep in mind that PUT will overwrite the whole object on the server
+            CheckForError(response, $"Update reservation for {reservationToUpdate.HotelId}");
+            return response.Data;
         }
 
         public bool DeleteReservation(int reservationId)
         {
-            throw new NotImplementedException();
+            //http://localhost:3000/reservations/:id
+            RestRequest request = new RestRequest($"reservations/{reservationId}");
+            IRestResponse response = client.Delete(request); // not data type to deserialize into because doesn't return data
+            CheckForError(response, $"Delete reservation {reservationId}");
+            return true; //successful delete if there are no errors
         }
 
         /// <summary>
