@@ -7,14 +7,19 @@ namespace HotelReservations.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "The field 'HotelId' is required.")]
         public int HotelId { get; set; }
 
+        [Required(ErrorMessage = "The field 'FullName' is required.")]
         public string FullName { get; set; }
 
+        [Required(ErrorMessage = "The field 'DateTime' is required.")]
         public DateTime CheckinDate { get; set; }
 
+        [Range(1, 14, ErrorMessage = "Number of night must be between 1 and 14")]
         public int Nights { get; set; }
 
+        [Range(1, 5, ErrorMessage= "Number of guests must be between 1 and 5")]
         public int Guests { get; set; }
 
         public Reservation()

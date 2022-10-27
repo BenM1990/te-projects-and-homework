@@ -37,10 +37,36 @@ namespace Locations.Controllers
         }
 
         [HttpPost]
-        public Location Add(Location location)
+        public ActionResult<Location> Add(Location location)
         {
             Location returnLocation = locationDao.Create(location);
-            return returnLocation;
+            return Created($"/locations/{returnLocation.Id}", returnLocation);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<Location> Update(int id, Location location)
+        {
+            Location existingLocation = locationDao.Get(id);
+            if (existingLocation == null)
+            {
+                return NotFound();
+            }
+
+            Location result = locationDao.Update(id, location);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            Location location = locationDao.Get(id);
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            locationDao.Delete(id);
+            return NoContent();
         }
     }
 }

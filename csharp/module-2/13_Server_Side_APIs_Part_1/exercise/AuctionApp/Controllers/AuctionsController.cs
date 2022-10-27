@@ -22,5 +22,6 @@ namespace AuctionApp.Controllers
                 dao = auctionDao;
             }
         }
+
     }
 }

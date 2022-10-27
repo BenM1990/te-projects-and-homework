@@ -55,5 +55,45 @@ namespace HotelReservations.Controllers
             Reservation added = reservationDao.Create(reservation);
             return Created($"/reservations/{added.Id}", added);
         }
+
+        //update reservation
+        [HttpPut("{id}")] // /reservations/:id 
+        public ActionResult<Reservation> UpdateReservation(int id, Reservation reservation)
+        {
+            Reservation existingReservation = reservationDao.Get(id);
+            if (existingReservation == null) //if the reservation doesn't exist 
+            {
+                return NotFound(); //404
+            }
+
+            //do what you gotta do to update the thing
+            Reservation updatedReservation = reservationDao.Update(existingReservation.Id, reservation);
+
+            return updatedReservation;
+        }
+
+        //delete reservation
+        [HttpDelete("{id}")] // /reservations/:id 
+        public ActionResult deleteReservation(int id) //send back a untyped ActionResult since I will never be sending a reservation back
+        {
+            Reservation existingReservation = reservationDao.Get(id);
+            if (existingReservation == null) //if the reservation doesn't exist 
+            {
+                return NotFound(); //404
+            }
+
+            bool result = reservationDao.Delete(id);
+
+            if (result) //if true (thing was deleted)
+            {
+                return NoContent(); //return 204 No Content 
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+
+
+        }
     }
 }

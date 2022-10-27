@@ -6,7 +6,6 @@ namespace AuctionApp.DAO
     public interface IAuctionDao
     {
         List<Auction> List();
-
         Auction Get(int id);
 
         Auction Create(Auction auction);
