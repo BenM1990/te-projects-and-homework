@@ -8,6 +8,7 @@ namespace AuctionApp.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class AuctionsController : ControllerBase
     {
         private readonly IAuctionDao auctionDao;
@@ -17,6 +18,7 @@ namespace AuctionApp.Controllers
             this.auctionDao = auctionDao;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public List<Auction> List(string title_like = "", double currentBid_lte = 0)
         {
@@ -46,6 +48,7 @@ namespace AuctionApp.Controllers
             }
         }
 
+        [Authorize(Roles = "admin, creator")]
         [HttpPost]
         public ActionResult<Auction> Create(Auction auction)
         {
@@ -53,6 +56,7 @@ namespace AuctionApp.Controllers
             return Created($"/auctions/{returnAuction.Id}", returnAuction);
         }
 
+        [Authorize(Roles = "admin, creator")]
         [HttpPut("{id}")]
         public ActionResult<Auction> Update(int id, Auction auction)
         {
@@ -66,6 +70,7 @@ namespace AuctionApp.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
@@ -89,7 +94,7 @@ namespace AuctionApp.Controllers
         [HttpGet("whoami")]
         public ActionResult WhoAmI()
         {
-            return Ok("");
+            return Ok(User.Identity.Name);
         }
     }
 }
