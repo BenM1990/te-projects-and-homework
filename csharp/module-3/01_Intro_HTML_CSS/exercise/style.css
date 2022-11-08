@@ -1,0 +1,35 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* we can use names or rgb hex values */
+    background-color: rgb(65, 124, 253);
+  }
+
+  header {
+    text-align: center;
+  }
+
+  img{
+      width: 400px;
+      height: 200px;
+  }
+
+  h1{
+      font-size: 75px;
+      font-weight: bold;
+  }
+
+  h2{
+      text-decoration: underline;
+  }
+
+#quote1{
+      font-style: italic;
+  }
+
+#quote2{
+    font-style: italic;
+}
+
+#quote3{
+    font-style: italic;
+}
