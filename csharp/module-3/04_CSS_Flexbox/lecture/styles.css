@@ -1,4 +1,52 @@
- 
+ body {
+   display: flex; /* turn it into a flexbox container */
+   flex-direction: column; /* direction is column (the default is rows) */
+   align-items: center; /* center all the items */
+ }
+
+ #hero footer {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+ }
+
+ #featured section {
+  display: flex;
+
+ }
+
+ #featured section article div {
+   display: flex;
+   justify-content: space-evenly;
+ }
+
+ #all-items section article {
+  display: flex;
+  align-items: center;
+ }
+
+
+/* :nth-child(even) gets all the even-numbered child elements */
+/* :first-child to get the first child element inside that */
+
+/* #all-items section article:nth-child(even) div:first-child{
+  order: 1
+} */
+
+/* the above code works the same way as this one */
+#all-items section article:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+#all-items section article div:last-child {
+  flex-basis: 80%;
+}
+
+#all-items section article div:first-child {
+  width: 50%;
+}
+
+
 
 
 /***** enter flexbox CSS above this line *****/
@@ -120,3 +168,22 @@ section {
     text-align: center;
   }
 }
+
+
+/* media query
+/* I don't want those three columns on anything smaller than a laptop screen */
+@media screen and (max-width: 1024px) {
+  #featured section {
+    /* i could do either one of these to make columns */
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+
+
+  }
+
+  #featured section article:nth-child(even){
+   border: 0px;
+  }
+} 
+
+
