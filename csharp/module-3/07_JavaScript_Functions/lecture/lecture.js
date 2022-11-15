@@ -28,6 +28,11 @@ function printToConsole(value) {
  * @param {number} secondParameter the second parameter to multiply
  */
 
+function  multiplyTogether(firstParameter, secondParameter)
+{
+  return firstParameter * secondParameter;
+}
+
 /**
  * This version makes sure that no parameters are ever missing. If
  * someone calls this function without parameters, we default the
@@ -38,7 +43,9 @@ function printToConsole(value) {
  * @param {number} [firstParameter=0] the first parameter to multiply
  * @param {number} [secondParameter=0] the second parameter to multiply
  */
-
+function multiplyNoUndefined(firstParameter = 0, secondParameter = 0) {
+  return firstParameter * secondParameter;
+}
 
  
 /**
@@ -87,12 +94,27 @@ function scopeTest() {
   }
 }
 
+/**
+ * 
+ * Takes the details about a person and returns a nice string.
+ * 
+ * @param {string} name the name of the person 
+ * @param {number} age the age of the person
+ * @param {string[]} listOfQuirks a list of personality quirks 
+ * @param {string} separator the string the separator the list of personality quirks by
+ * @returns description of a person
+ */
 function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') {
   let description = `${name} is currently ${age} years old. Their quirks are: `;
   return description + listOfQuirks.join(separator);
 }
 
+
+
 /**
+ * 
+ * 
+ * 
  * Takes an array and, using the power of anonymous functions, generates
  * their sum.
  *
@@ -100,7 +122,14 @@ function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') 
  * @returns {number} sum of all the numbers
  */
 function sumAllNumbers(numbersToSum) {
-  return numbersToSum.reduce();
+  //the .reduce function has two parameters, and is smart enough to pass them off to addTwoNumbersTogether
+  return numbersToSum.reduce((sum, nextNumber) => {
+    return sum + nextNumber;
+  });
+}
+
+function addTwoNumbersTogether(sum, nextNumber){
+  return sum + nextNumber;
 }
 
 /**
@@ -111,4 +140,23 @@ function sumAllNumbers(numbersToSum) {
  * @returns {number[]} a new array with only those numbers that are
  *   multiples of 3
  */
-function allDivisibleByThree(numbersToFilter) {}
+function allDivisibleByThree(numbersToFilter) {
+  //return numbersToFilter.filter(isDivisibleByThree); // filter has one param and is smart enough to send it to the named function
+  return numbersToFilter.filter((number) => { return (number % 3 === 0); });
+}
+
+//first, let's write a named function that tells if a number is a multiple of 3
+function isDivisibleByThree(number) {
+  //return true of false
+  return (number % 3 === 0);
+}
+
+function concatenateABunchOfWords() {
+  let string = '';
+  for(let i = 0; i < arguments.length; i++) {
+    string += arguments[i] + ', ';
+  }
+  return string;
+}
+
+
