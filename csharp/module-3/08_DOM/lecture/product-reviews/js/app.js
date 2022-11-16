@@ -36,19 +36,56 @@ const reviews = [
  * Get the page title by the id and the query the .name selector
  * once you have the element you can add the product name to the span.
  */
-function setPageTitle() {}
+function setPageTitle() {
+  //get the page title h1:
+  const pageTitle = document.getElementById('page-title');
+  //we looked inside the h1 for span with class 'name' :
+  const pageTitleSpan = pageTitle.querySelector('.name');
+  //put the book title inside the span
+  pageTitleSpan.innerText = book_name;
+}
 
 /**
  * Add the product description to the page.
  */
-function setPageDescription() {}
+function setPageDescription() {
+  //get thw <p> with class 'description' and put the description in it
+  const pageDescription = document.querySelector('.description');
+  pageDescription.innerText = description;
+
+}
 
 /**
  * Display all of the reviews on the page.
  * Loop over the array of reviews and use some helper functions
  * to create the elements needed for the markup and add them to the DOM.
  */
-function displayReviews() {}
+function displayReviews() {
+  const main = document.getElementById('main');
+
+  //four review boxes
+  reviews.forEach((review) => {
+
+  //use document.createElement to make a new div
+  const container = document.createElement('div');
+  //set some css classes on the containter so that we can see it better
+  container.classList.add('review');
+
+
+  //call addReviewer to get the reviewers name in the div
+  addReviewer(container, review.reviewer);
+  //call addRating to add the div with the stars
+  addRating(container, review.rating);
+  //call addTitle to add the title of the review
+  addTitle(container, review.title);
+  //call addReview
+  addReview(container, review.review);
+
+  //insert our new div into the DOM
+  main.insertAdjacentElement('beforeend', container);
+
+  });
+}
 
 /**
  * Create a new h2 element with the name of the reviewer and append it to
@@ -57,28 +94,78 @@ function displayReviews() {}
  * @param {HTMLElement} parent: The element to append the reviewer to
  * @param {string} name The name of the reviewer
  */
-function addReviewer(parent, name) {}
+function addReviewer(parent, name) {
+  //create the h2
+  const reviewer = document.createElement('h2');
+  //set the inner text to the reviewer's name
+  reviewer.innerText = name;
+  //append the h2 onto the parent element
+  parent.appendChild(reviewer);
+
+}
 
 /**
  * Add the rating div along with a star image for the number of ratings 1-5
  * @param {HTMLElement} parent
  * @param {Number} numberOfStars
  */
-function addRating(parent, numberOfStars) {}
+function addRating(parent, numberOfStars) {
+//create another div to hold the star rating
+const ratingDiv = document.createElement('div');
+ratingDiv.classList.add('rating');
+//put the correct number of star images based on their ratings.
+//use a for loop to count up to the number of stars
+for(let i = 0; i < numberOfStars; i++)
+{
+  //add a star in the ratingDiv
+  const star = document.createElement('img');
+  star.src = 'img/star.png'; //we can do this
+  //.setAttribute takes 2 params: the attribute and the value
+  //star.setAttribute('src', 'img/star.png');
+  
+  //append it to the ratingDiv
+  ratingDiv.appendChild(star);
+
+}
+
+
+  
+//append the rating div to the container div (parent)
+parent.appendChild(ratingDiv);
+
+
+}
 
 /**
  * Add an h3 element along with the review title
  * @param {HTMLElement} parent
  * @param {string} title
  */
-function addTitle(parent, title) {}
+function addTitle(parent, title) {
+  //create the h3
+  const reviewTitle = document.createElement('h3')
+  //put the title in it
+  reviewTitle.innerText = title;
+  //attach it to the parent
+  parent.appendChild(reviewTitle);
+}
 
 /**
  * Add the product review
  * @param {HTMLElement} parent
  * @param {string} review
  */
-function addReview(parent, review) {}
+function addReview(parent, review) {
+  const reviewParagraph = document.createElement('p');
+
+  reviewParagraph.innerText = review;
+
+  
+
+
+  parent.appendChild(reviewParagraph);
+
+}
 
 // set the product reviews page title
 setPageTitle();
