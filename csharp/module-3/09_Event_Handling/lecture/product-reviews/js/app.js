@@ -66,12 +66,47 @@ setPageDescription();
 // Display all of the product reviews on our page.
 displayReviews();
 
+//find the target of my event (I want to click on the description)
+const descriptionParagraph = document.querySelector('.description');
+//STEP TWO: register an event listener
+descriptionParagraph.addEventListener('click', toggleDescriptionEdit);
+
+const inputDescription = document.getElementById('inputDesc');
+inputDescription.addEventListener('keyup', (event) => 
+            {                    
+             if(event.key === 'Enter') {
+            exitDescriptionEdit(event.target, true);
+            }
+            if(event.key === 'Escape') {
+              exitDescriptionEdit(event.target, false);
+            }
+          });
+
+//i want to show the hidden form when I click the 'add review' button
+
+const addReviewBtn = document.getElementById('btnToggleForm');
+
+//the second param to .addEventListener is a function and I can use an anonymous function if I want, where my anonymous function calls another function
+//addReviewBtn.addEventListener('click', (event) => { showHideForm( ) });
+
+//don't need parameters passed to my handler, so I can do a reference to the handler function if I want
+addReviewBtn.addEventListener('click', showHideForm);
+
+//hook up save review button
+const saveReviewBtn = document.getElementById('btnSaveReview');
+saveReviewBtn.addEventListener('click', 
+    (event) => {
+        event.preventDefault();
+        saveReview();
+      });
+
 /**
  * Hide the description and show the text box.
  *
  * @param {Element} desc the element containing the description
  */
-function toggleDescriptionEdit(desc) {
+function toggleDescriptionEdit() {
+  const desc = document.querySelector('.description')
   const textBox = desc.nextElementSibling;
   textBox.value = desc.innerText;
   textBox.classList.remove('d-none');
@@ -129,4 +164,19 @@ function resetFormValues() {
 /**
  * Save the review that was added using the add review form.
  */
-function saveReview() {}
+function saveReview() {
+  let name = document.getElementById('name');
+  let title = document.getElementById('title');
+  let rating = document.getElementById('rating');
+  let review = document.getElementById('review');
+
+  const newReview =   {
+    reviewer: name.value,
+    title: title.value,
+    review: review.value,
+    rating: rating.value
+  }
+
+  displayReview(newReview);
+
+}
