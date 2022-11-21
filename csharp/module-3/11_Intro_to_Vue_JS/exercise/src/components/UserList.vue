@@ -24,6 +24,11 @@
         </td>
       </tr>
       <!-- user listing goes here -->
+      <tr v-for="user in Users" v-bind:key="user"></tr>
+      <td {{user.firstName}}></td>
+      <td {{user.lastName}}></td>
+      <td {{user.username}}></td>
+      <td {{user.emailFilter}}></td>
     </tbody>
   </table>
 </template>
@@ -42,6 +47,34 @@ export default {
         { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive' }
       ]
     }
+  },
+  computed: {
+    firstNameFilter() {
+      return this.users.filter((user) => {
+        return user.firstName.includes(this.filterText);
+      });
+    },
+    lastNameFilter() {
+      return this.users.filter((user) => {
+        return user.lastName.includes(this.filterText);
+      });
+    },
+    usernameFilter() {
+      return this.users.filter((user) => {
+        return user.username.includes(this.filterText);
+      });
+    },
+    emailAddressFilter() {
+      return this.users.filter((user) => {
+        return user.lastName.includes(this.filterText);
+      });
+    },
+    statusFilter() {
+      return this.users.filter((user) => {
+        return user.status.includes(this.filterText);
+      });
+    }
+
   }
 }
 </script>
