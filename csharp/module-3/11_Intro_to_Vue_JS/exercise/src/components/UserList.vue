@@ -11,12 +11,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><input type="text" id="firstNameFilter"/></td>
-        <td><input type="text" id="lastNameFilter"/></td>
-        <td><input type="text" id="usernameFilter"/></td>
-        <td><input type="text" id="emailFilter"/></td>
+        <td><input v-model="search.firstName" type="text" id="firstNameFilter"/></td>
+        <td><input v-model="search.lastName" type="text" id="lastNameFilter"/></td>
+        <td><input v-model="search.username" type="text" id="usernameFilter"/></td>
+        <td><input v-model="search.emailAddress" type="text" id="emailFilter"/></td>
         <td>
-          <select id="statusFilter">
+          <select v-model="search.status" id="statusFilter">
             <option value="">Show All</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
@@ -24,11 +24,13 @@
         </td>
       </tr>
       <!-- user listing goes here -->
-      <tr v-for="user in Users" v-bind:key="user"></tr>
-      <td {{user.firstName}}></td>
-      <td {{user.lastName}}></td>
-      <td {{user.username}}></td>
-      <td {{user.emailFilter}}></td>
+      <tr v-for="user in filteredList" v-bind:key="user">
+      <td> {{user.firstName}}</td>
+      <td> {{user.lastName}}</td>
+      <td> {{user.username}}</td>
+      <td> {{user.emailAddress}}</td>
+      <td> {{user.status}}</td>
+      </tr>
     </tbody>
   </table>
 </template>
@@ -45,38 +47,30 @@ export default {
         { firstName: 'Ben', lastName: 'Carter', username: 'bcarter', emailAddress: 'bcarter@gmail.com', status: 'Active' },
         { firstName: 'Katie', lastName: 'Jackson', username: 'kjackson', emailAddress: 'kjackson@yahoo.com', status: 'Active' },
         { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive' }
-      ]
+      ],
+      search: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        emailAddress: '',
+        status: ''
+      }
     }
   },
-  computed: {
-    firstNameFilter() {
-      return this.users.filter((user) => {
-        return user.firstName.includes(this.filterText);
-      });
-    },
-    lastNameFilter() {
-      return this.users.filter((user) => {
-        return user.lastName.includes(this.filterText);
-      });
-    },
-    usernameFilter() {
-      return this.users.filter((user) => {
-        return user.username.includes(this.filterText);
-      });
-    },
-    emailAddressFilter() {
-      return this.users.filter((user) => {
-        return user.lastName.includes(this.filterText);
-      });
-    },
-    statusFilter() {
-      return this.users.filter((user) => {
-        return user.status.includes(this.filterText);
-      });
+computed: {
+  filteredList() {
+        let filterItem = this.users.filter((item) => {
+        return item.firstName.toLowerCase().includes(this.search.firstName.toLowerCase()) 
+        && item.lastName.toLowerCase().includes(this.search.lastName.toLowerCase())
+        && item.username.toLowerCase().includes(this.search.username.toLowerCase())
+        && item.emailAddress.toLowerCase().includes(this.search.emailAddress.toLowerCase())
+        && item.status.includes(this.search.status)
+      })
+      return filterItem;
     }
-
   }
 }
+
 </script>
 
 <style scoped>
