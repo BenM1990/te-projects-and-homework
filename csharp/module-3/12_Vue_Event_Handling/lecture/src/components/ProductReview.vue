@@ -5,43 +5,72 @@
     <p class="description">{{ description }}</p>
 
     <div class="well-display">
-      <div class="well">
+      <div class="well" v-on:click="filter = 0">
         <span class="amount">{{ averageRating }}</span>
         Average Rating
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 1">
         <span class="amount">{{ numberOfOneStarReviews }}</span>
         1 Star Review{{ numberOfOneStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 2">
         <span class="amount">{{ numberOfTwoStarReviews }}</span>
         2 Star Review{{ numberOfTwoStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 3">
         <span class="amount">{{ numberOfThreeStarReviews }}</span>
         3 Star Review{{ numberOfThreeStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 4">
         <span class="amount">{{ numberOfFourStarReviews }}</span>
         4 Star Review{{ numberOfFourStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 5">
         <span class="amount">{{ numberOfFiveStarReviews }}</span>
         5 Star Review{{ numberOfFiveStarReviews === 1 ? '' : 's' }}
       </div>
     </div>
 
+    <button v-on:click="showForm = true" v-if="showForm === false">Show Form</button>
+
+    <form v-on:submit.prevent="addNewReview" v-if="showForm === true"> <!-- from the method -->
+    <div class="form-element">
+        <label for="reviewer">Name:</label>
+        <input id="reviewer" type="text" v-model="newReview.reviewer" />
+    </div>
+    <div class="form-element">
+        <label for="title">Title:</label>
+        <input id="title" type="text" v-model="newReview.title" />
+    </div>
+    <div class="form-element">
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="newReview.rating">
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+        </select>
+    </div>
+    <div class="form-element">
+        <label for="review">Review:</label>
+        <textarea id="review" v-model="newReview.review"></textarea>
+    </div>
+    <input type="submit" value="Save">
+    <input type="button" value="Cancel" v-on:click="resetForm($event)">
+</form>
+
     <div
       class="review"
       v-bind:class="{ favorited: review.favorited }"
-      v-for="review in reviews"
+      v-for="review in filteredReviews" 
       v-bind:key="review.id"
-    >
+      >
       <h4>{{ review.reviewer }}</h4>
       <div class="rating">
         <img
@@ -73,6 +102,8 @@ export default {
       description:
         "Host and plan the perfect cigar party for all of your squirrelly friends.",
       newReview: {},
+      showForm: false,
+      filter: 0,
       reviews: [
         {
           reviewer: "Malcolm Gladwell",
@@ -140,6 +171,32 @@ export default {
       return this.reviews.reduce((currentCount, review) => {
         return currentCount + (review.rating === 5);
       }, 0);
+    },
+    //filteredReviews computed property will return an [] of reviews
+    //based on the value of the filter variable
+    filteredReviews() {
+      //.filter array function returns a new array
+      let filtered = this.reviews.filter((review) => {
+        //if the filter variable is 0, all the reviews should be returned
+        //if the filter variable is not 0, only return reviews with the filter value
+        if(this.filter === 0) {return true;}
+        else {return this.filter === review.rating}
+      })
+      return filtered;
+    }
+  },
+  methods: {
+    //don't need the function keyword, but that's what this is
+    addNewReview() {
+        this.reviews.unshift(this.newReview);
+        //add the newReview object (with 2way binding to template)
+        //to the reviews []
+        this.resetForm(); // reset the form after 'saving' the review
+    },
+    resetForm(event){
+      this.newReview = {}; //empty out the review
+      console.log(event.type);
+      this.showForm = false; //hide the form
     }
   }
 };
