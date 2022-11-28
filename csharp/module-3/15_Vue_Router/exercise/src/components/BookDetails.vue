@@ -3,6 +3,7 @@
   {{book.title}}
   {{book.author}}
   {{book.isbn}}
+  </div>
 </template>
 
 <script>
