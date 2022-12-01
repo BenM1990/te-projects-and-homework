@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BookDetails from '@/components/BookDetails'
+import BookDetails from '../components/BookDetails'
 export default {
     components: {
         BookDetails
