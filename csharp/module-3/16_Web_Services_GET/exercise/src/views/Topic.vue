@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Topic Detail</h1>
-    <topic-detail />
+    <topic-details />
   </div>
 </template>
 
