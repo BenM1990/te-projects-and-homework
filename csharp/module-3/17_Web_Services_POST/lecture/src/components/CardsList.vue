@@ -68,7 +68,24 @@ export default {
         });
     },
     deleteBoard() {
-      
+      if(
+        confirm("Are you sure, you might regret it?")
+      ){
+      boardsService.deleteBoard(this.$route.params.id).then(() => {
+        alert('Board succesfully deleted!');
+        this.$store.commit('DELETE_BOARD', this.$route.params.id);
+        this.$router.push({name: ' Home'});
+      }).catch((error) => {
+        if(error.response) {
+          this.errorMsg = 'Error deleting board, response received was ' + error.response.statusText + '.';
+        }
+        else if(error.request) {
+          this.errorMsg = 'Error deleting board, server is lazy.';
+        }
+
+      })
+      //users aren't allowed to look at boards that don't exist, so push 'em back to the home page
+      }
     }
   },
   created() {

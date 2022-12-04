@@ -75,7 +75,31 @@ export default {
       });
     },
     saveNewBoard() {
-
+      this.loading = true;
+      this.showAddBoard = false; // take away the form so the user can't click the save button 100 times while waiting for the Promise to resolve
+      boardsService.addBoard(this.newBoard).then(() => {
+        this.retrieveBoards();
+        //reset new board object
+        this.newBoard = {
+          title: '',
+          backgroundColor: this.randomBackgroundColor()
+        }
+      }).catch()((error) => {
+        if(error.response){
+          //if error object has a response, I know I made it to the server
+          this.errorMsg = 'Error adding a new board, response received from the server was ' + error.response.statusText + '.';
+        }
+        else if(error.request) {
+          //we never got a response, so there was a problem reaching the server
+          this.errorMsg = 'Error adding a new board, could not reach the server.';
+        }
+        else {
+          //no request, no response, something has gone terribly wrong in the application
+          this.errorMsg = 'Error adding a new board, request could not be created.';
+        }
+        this.isLoading = false;
+      });
+      
     },
     randomBackgroundColor() {
       return "#" + this.generateHexCode();
