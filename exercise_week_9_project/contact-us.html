@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred's Frozen Pops</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header id="header">
+        <div id="title">
+            <img src="./images/blue-pop.png" />
+            <h1>Fred's Frozen Pops</h1>
+        </div>
+        <nav>
+            <ul id="site-nav">
+                <li id="home"><a href="index.html">HOME</a></li>
+                <li id="store"><a href="#">STORE</a></li>
+                <li id="contact-us"><a href="contact-us.html">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="contact-page">
+        <form method="POST" action="api/contact-us"> <!-- method is HTTP method, action is path -->
+            
+            <h2 id="subtitle">Contact Us</h2>
+
+            <div class="name"> <!-- div is just a container element -->
+                <label for="name">Name:</label>
+                <br/>
+                <input id="name" type="text"/>
+                <br/>
+                <br/>
+
+            </div>
+
+            <div class="how">
+                <label for="howTheyHeardOfUs">How did you hear of us?</label>
+                <br/>
+                <input id="howTheyHeardOfUs" type="text"/>
+                <br/>
+                <br/>
+            </div>
+
+            <div class="comments">
+                <label for="comments">Please let us know any comments you have:</label>
+                <br/>
+                <textarea id="comments"> </textarea>
+                <br/>
+                <br/>
+            </div>
+
+            <div class="pop-color">
+                <label for="favoriteColor">what is your favorite color of frozen pop?</label>
+                <br/>
+                <input id="favoriteColor" type=""/>
+                <br/>
+                <br/>
+
+            </div>
+            
+            <div class="submit">
+                <input type="submit" id="submit-button">                    
+                <br/>
+                <br/>
+
+            </div>
+        </form>
+    </main>
+    <footer>
+        (C) 2022. All rights reserved.
+    </footer>
+</body>
+</html>
