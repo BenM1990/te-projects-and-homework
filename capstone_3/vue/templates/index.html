@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIT REEL</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <ion-icon id="dislike" name="eye-off-outline"></ion-icon>
+    <div id="swiper">
+        <!-- <div class="card" style="--i:0">
+            <img src="https://m.media-amazon.com/images/M/MV5BYWQ2NzQ1NjktMzNkNS00MGY1LTgwMmMtYTllYTI5YzNmMmE0XkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_.jpg" alt="notimetodie"></img>
+        </div>
+        <div class="card" style="--i:1">
+            <img src="https://m.media-amazon.com/images/M/MV5BOWQ1MDE1NzgtNTQ4OC00ZjliLTllZDAtN2IyOTVmMTc5YjUxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="spectre"></img>
+        </div>
+        <div class="card" style="--i:2">
+            <img src="https://m.media-amazon.com/images/M/MV5BMWZiNjE2OWItMTkwNy00ZWQzLWI0NTgtMWE0NjNiYTljN2Q1XkEyXkFqcGdeQXVyNzAwMjYxMzA@._V1_.jpg" alt="skyfall"></img>
+        </div>
+        <div class="card" style="--i:3">
+            <img src="https://m.media-amazon.com/images/M/MV5BMzhjYzlmYjQtYmU0Yy00NjNkLWFmOTQtZjQxZWU4NjY1Y2M4XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg" alt="quantumofsolace"></img>
+        </div>
+        <div class="card" style="--i:4">
+            <img src="https://m.media-amazon.com/images/M/MV5BYmI3MmMzMGMtNzc4Ni00YWQ4LWFkMDYtNjVlOWU3ZGZiNjY1XkEyXkFqcGdeQXVyNDQ2MTMzODA@._V1_.jpg" alt="casinoroyale"></img>
+        </div> -->
+    </div>
+    <ion-icon id="like" name="eye-outline" onclick="openPopup"></ion-icon>
+
+    <div class="popup" id="popup">
+        <h2>Seen It!</h2>
+        <p>Did you like it?</p>
+        <button type="submit" class="like-button">Like It</button>
+        <button type="submit" class="dislike-button">Dislike</button>
+
+    </div>
+
+    <div class="popup-notseen" id="popup">
+        <h2>WHHHHHAAAAT!</h2>
+        <h3> You Haven't Seen It?!</h3>
+        <p>Do You Want To?</p>
+        <p>This is a brief summary</p>
+        <p>of the film</p>
+        <button type="submit" class="like-button">Like It</button>
+        <button type="submit" class="dislike-button">Dislike</button>
+
+    </div>
+
+
+
+ <script>
+    let popup = document.getElementById(".popup");
+    function openPopup(){
+        popup.classList.add("open-popup");
+    }
+</script>
+
+<script src="./card.js"></script>
+<script src="./script.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html> 
